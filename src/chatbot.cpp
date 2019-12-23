@@ -26,6 +26,7 @@ ChatBot::ChatBot(std::string filename)
     _chatLogic = nullptr;
     _rootNode = nullptr;
 
+    _filename = filename;
     // load image into heap memory
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
@@ -51,8 +52,9 @@ ChatBot::ChatBot(const ChatBot &source)
    std::cout << "ChatBot Copy Constructor" << std::endl;
 
    // real copy, see https://docs.wxwidgets.org/3.0/classwx_bitmap.html
-   *_image = source._image->GetSubBitmap(
-            wxRect(0,0,source._image->GetWidth(),source._image->GetHeight()));
+   //*_image = source._image->GetSubBitmap(
+   //         wxRect(0,0,source._image->GetWidth(),source._image->GetHeight()));
+   _image = new wxBitmap(source._filename, wxBITMAP_TYPE_PNG);   
 }	
 
 // copy assignment operator
@@ -64,8 +66,9 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
       return *this;
    }
    delete _image;
-   *_image = source._image->GetSubBitmap(
-            wxRect(0,0,source._image->GetWidth(),source._image->GetHeight()));
+   //*_image = source._image->GetSubBitmap(
+   //         wxRect(0,0,source._image->GetWidth(),source._image->GetHeight()));
+   _image = new wxBitmap(source._filename, wxBITMAP_TYPE_PNG);   
    return *this;
 }	
 

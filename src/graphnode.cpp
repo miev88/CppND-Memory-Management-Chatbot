@@ -1,3 +1,5 @@
+#include "memory"
+
 #include "graphedge.h"
 #include "graphnode.h"
 
@@ -38,15 +40,15 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 //void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 void GraphNode::MoveChatbotHere(std::unique_ptr<ChatBot>(chatbot))
 {
-    _chatBot = chatbot;
+    _chatBot = chatbot.get();
     _chatBot->SetCurrentNode(this);
 }
 
-//void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
-void GraphNode::MoveChatbotToNewNode(std::unique_ptr<GraphNode> newNode)
+void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(_chatBot);
-    _chatBot = nullptr; // invalidate pointer at source
+    //newNode->MoveChatbotHere(_chatBot);
+    //_chatBot = nullptr; // invalidate pointer at source
+    _chatBot->SetCurrentNode(newNode);
 }
 ////
 //// EOF STUDENT CODE

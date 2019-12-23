@@ -10,6 +10,7 @@ class ChatLogic; // forward declaration
 class ChatBot
 {
 private:
+    std::string _filename;
     // data handles (owned)
     wxBitmap *_image; // avatar image
 
