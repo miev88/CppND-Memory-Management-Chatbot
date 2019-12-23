@@ -172,10 +172,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             //GraphEdge *edge = new GraphEdge(id);
 			    std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
                             //edge->SetChildNode(*childNode);
-                            edge->SetChildNode((*childNode).get());
+                            edge->SetChildNode(childNode->get());
 			    //edge->SetParentNode(*parentNode);
-			    edge->SetParentNode((*parentNode).get());
-                            //_edges.push_back(edge);
+			    edge->SetParentNode(parentNode->get());
+                            _edges.push_back(edge.get());
 
                             // find all keywords for current node
                             //AddAllTokensToElement("KEYWORD", tokens, *edge);
@@ -211,23 +211,18 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     //// STUDENT CODE
     ////
 
-    std::unique_ptr<ChatBot> chatBot = std::make_unique<ChatBot>(filename);
-    chatBot->SetChatLogicHandle(this);
-
     // identify root node
-    //GraphNode *rootNode = nullptr;
-    std::unique_ptr<GraphNode> rootNode;
-
+    GraphNode *rootNode = nullptr;
+    
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     {
         // search for nodes which have no incoming edges
         if ((*it)->GetNumberOfParents() == 0)
         {
-
             if (rootNode == nullptr)
             {
                 //rootNode = *it; // assign current node to root
-		rootNode = std::make_unique<GraphNode>((*it)->GetID());
+		rootNode = it->get();
             }
             else
             {
@@ -237,8 +232,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    //_chatBot->SetRootNode(rootNode);
-    chatBot->SetRootNode(rootNode.get());
+    ChatBot chatBot(filename);
+    chatBot.SetChatLogicHandle(this);
+    chatBot.SetRootNode(rootNode);
     //rootNode->MoveChatbotHere(_chatBot);
     rootNode->MoveChatbotHere(std::move(chatBot));
     
