@@ -21,7 +21,7 @@ private:
     //ChatLogic *_chatLogic;
     
     // ChatbotPanelDialog exclusively owns the resource pointed to by _chatLogic
-    std::unique_ptr<ChatLogic> _chatLogic;// = std::make_unique<ChatLogic>();
+    std::unique_ptr<ChatLogic> _chatLogic;
     
     ////
     //// EOF STUDENT CODE
@@ -29,11 +29,17 @@ private:
 public:
     // constructor / destructor
     ChatBotPanelDialog(wxWindow *parent, wxWindowID id);
-    //~ChatBotPanelDialog();
+    ~ChatBotPanelDialog();
 
+    //// STUDENT CODE
+    ////
+    
     // getter / setter
     // return raw pointer to the object
     ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); } // { return _chatLogic;  };
+
+    ////
+    //// EOF STUDENT CODE
 
     // events
     void paintEvent(wxPaintEvent &evt);
