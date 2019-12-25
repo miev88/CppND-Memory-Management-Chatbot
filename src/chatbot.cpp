@@ -66,16 +66,16 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
       return *this;
    }
    
+   if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+   {
+       delete _image;
+       //_image = NULL;
+   }
+   
    _currentNode = source._currentNode;
    _rootNode = source._rootNode;
    _chatLogic = source._chatLogic;
       
-   if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
-   {
-       delete _image;
-       _image = NULL;
-   }
-   
    _image = new wxBitmap(*(source._image));   
    return *this;
 }	
@@ -88,14 +88,13 @@ ChatBot::ChatBot(ChatBot &&source)
    _currentNode = source._currentNode;
    _rootNode = source._rootNode;
    _chatLogic = source._chatLogic;
+   _image = source._image;
   
    _chatLogic->SetChatbotHandle(this);
-
+   
    source._currentNode = nullptr;
    source._rootNode = nullptr;
    source._chatLogic = nullptr;
-
-   _image = source._image;
    source._image = NULL; 
 }	
 
@@ -108,23 +107,22 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
       return *this;
    }
 
-   _currentNode = source._currentNode;
-   _rootNode = source._rootNode;
-   _chatLogic = source._chatLogic;
-  
-   _chatLogic->SetChatbotHandle(this);
-
-   source._currentNode = nullptr;
-   source._rootNode = nullptr;
-   source._chatLogic = nullptr;
-
    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
    {
        delete _image;
-       _image = NULL;
+       //_image = NULL;
    }
    
-   _image = source._image;
+   _currentNode = source._currentNode;
+   _rootNode = source._rootNode;
+   _chatLogic = source._chatLogic;
+    _image = source._image;
+   
+   _chatLogic->SetChatbotHandle(this);
+ 
+   source._currentNode = nullptr;
+   source._rootNode = nullptr;
+   source._chatLogic = nullptr;
    source._image = NULL; 
    
    return *this;
