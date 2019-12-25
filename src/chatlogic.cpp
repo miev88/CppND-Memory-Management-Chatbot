@@ -219,7 +219,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
             if (rootNode == nullptr)
             {
                 //rootNode = *it; // assign current node to root
-		rootNode = it->get(); // it is now a smart pointer
+		rootNode = it->get(); 
             }
             else
             {
@@ -229,9 +229,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    std::unique_ptr<ChatBot> chatBot = std::make_unique<ChatBot>("../images/chatbot.png");
-    chatBot->SetChatLogicHandle(this);
-    chatBot->SetRootNode(rootNode);
+    ChatBot chatBot("../images/chatbot.png");
+    chatBot.SetChatLogicHandle(this);
+    chatBot.SetRootNode(rootNode);
     //rootNode->MoveChatbotHere(_chatBot);
     rootNode->MoveChatbotHere(std::move(chatBot));
     

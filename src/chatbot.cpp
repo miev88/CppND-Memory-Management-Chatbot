@@ -69,7 +69,7 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
    {
        delete _image;
-       //_image = NULL;
+       _image = NULL;
    }
    
    _currentNode = source._currentNode;
@@ -110,7 +110,7 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
    {
        delete _image;
-       //_image = NULL;
+       _image = NULL;
    }
    
    _currentNode = source._currentNode;
