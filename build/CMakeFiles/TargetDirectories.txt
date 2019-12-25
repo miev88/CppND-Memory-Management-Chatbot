@@ -1,0 +1,3 @@
+/home/michele/Documents/udacity_nanodegree/cpp/CppND-Memory-Management-Chatbot/build/CMakeFiles/membot.dir
+/home/michele/Documents/udacity_nanodegree/cpp/CppND-Memory-Management-Chatbot/build/CMakeFiles/rebuild_cache.dir
+/home/michele/Documents/udacity_nanodegree/cpp/CppND-Memory-Management-Chatbot/build/CMakeFiles/edit_cache.dir

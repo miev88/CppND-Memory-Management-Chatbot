@@ -70,7 +70,11 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
    _rootNode = source._rootNode;
    _chatLogic = source._chatLogic;
       
-   delete _image;
+   if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+   {
+       delete _image;
+       _image = NULL;
+   }
    
    _image = new wxBitmap(*(source._image));   
    return *this;
@@ -114,7 +118,11 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
    source._rootNode = nullptr;
    source._chatLogic = nullptr;
 
-   delete _image;
+   if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+   {
+       delete _image;
+       _image = NULL;
+   }
    
    _image = source._image;
    source._image = NULL; 
