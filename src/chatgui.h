@@ -18,8 +18,6 @@ private:
     //// STUDENT CODE
     ////
 
-    //ChatLogic *_chatLogic;
-    
     // ChatbotPanelDialog exclusively owns the resource pointed to by _chatLogic
     std::unique_ptr<ChatLogic> _chatLogic;
     
@@ -35,8 +33,7 @@ public:
     ////
     
     // getter / setter
-    // return raw pointer to the object
-    ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); } // { return _chatLogic;  };
+    ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
 
     ////
     //// EOF STUDENT CODE
